@@ -16,7 +16,7 @@ public class MongoDdInitializerConfiguration {
 	@Bean
 	ApplicationRunner databaseInitialization(UserRepository userRepository) {
 		return a -> userRepository.count()
-				.then(n -> n == 0 ? userRepository.save(new User("Stephane", "Nicoll")) : Mono.empty())
+				.flatMap(n -> n == 0 ? userRepository.save(new User("Stephane", "Nicoll")) : Mono.empty())
 				.block();
 	}
 

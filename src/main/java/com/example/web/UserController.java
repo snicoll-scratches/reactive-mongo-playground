@@ -25,7 +25,7 @@ public class UserController {
 	@GetMapping("/users/{id}")
 	Mono<User> getById(@PathVariable String id) {
 		return this.userRepository.findOne(id)
-				.otherwiseIfEmpty(Mono.error(
+				.switchIfEmpty(Mono.error(
 						new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found")));
 	}
 

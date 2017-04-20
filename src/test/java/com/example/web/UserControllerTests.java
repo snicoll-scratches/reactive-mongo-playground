@@ -31,7 +31,7 @@ public class UserControllerTests {
 		this.webClient.get().uri("/users/{id}", "abcd")
 				.exchange()
 				.expectStatus().isOk()
-				.expectBody(User.class).value().isEqualTo(expected);
+				.expectBody(User.class).isEqualTo(expected);
 	}
 
 	@Test
