@@ -24,7 +24,7 @@ public class UserController {
 
 	@GetMapping("/users/{id}")
 	Mono<User> getById(@PathVariable String id) {
-		return this.userRepository.findOne(id)
+		return this.userRepository.findById(id)
 				.switchIfEmpty(Mono.error(
 						new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found")));
 	}
@@ -36,7 +36,7 @@ public class UserController {
 
 	@PostMapping("/users")
 	Mono<Void> save(@RequestBody Mono<User> user) {
-		return this.userRepository.save(user).then();
+		return this.userRepository.saveAll(user).then();
 	}
 
 }

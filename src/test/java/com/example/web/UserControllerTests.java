@@ -27,7 +27,7 @@ public class UserControllerTests {
 	@Test
 	public void findById() {
 		User expected = new User("abcd", "John", "Smith");
-		given(repository.findOne("abcd")).willReturn(Mono.just(expected));
+		given(repository.findById("abcd")).willReturn(Mono.just(expected));
 		this.webClient.get().uri("/users/{id}", "abcd")
 				.exchange()
 				.expectStatus().isOk()
@@ -36,7 +36,7 @@ public class UserControllerTests {
 
 	@Test
 	public void findByIdDoesNotExist() {
-		given(repository.findOne("does-not-exist")).willReturn(Mono.empty());
+		given(repository.findById("does-not-exist")).willReturn(Mono.empty());
 		this.webClient.get().uri("/users/{id}", "does-not-exist")
 				.exchange().expectStatus().isNotFound();
 	}
